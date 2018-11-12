@@ -1,0 +1,39 @@
+{
+  "name": "xbuilder",
+  "version": "1.0.8",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WGHADWR/xbuilder.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cli-color": "^1.2.0",
+    "commander": "^2.17.1",
+    "inquirer": "^6.1.0",
+    "mkdirp": "^0.5.1",
+    "single-line-log": "^1.1.2",
+    "xmldom": "^0.1.27",
+    "zip-local": "^0.3.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime": "^7.1.2",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^4.5.2",
+    "json-loader": "^0.5.7",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.2"
+  }
+}

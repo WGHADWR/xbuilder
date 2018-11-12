@@ -1,0 +1,17 @@
+{
+  "compact": false,
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    [
+      "@babel/transform-runtime"
+    ],
+    [
+      "@babel/plugin-transform-modules-commonjs",
+      {
+        "allowTopLevelThis": true
+      }
+    ]
+  ]
+}

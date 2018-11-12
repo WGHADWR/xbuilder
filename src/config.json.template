@@ -1,0 +1,29 @@
+{
+  "oem": {
+    "gxyw": {
+      "id": "com.gxhc.gxyw.survey",
+      "name": "广信勘察",
+      "version": "1.0.0",
+      "productId": "zjgx",
+      "serverUrl": "http://yw.zj-gx.com:70",
+      "resServerUrl": "http://yw.zj-gx.com:71",
+      "jpush_app_key": "27d467244451f9797e99780f",
+      "baidu_ak": "o0PdgT1a7922KZgRO7V35GGY5qAb4t13",
+      "updateUrl_Android": "/its_android.apk",
+      "updateUrl_IOS": "https://itunes.apple.com/cn/app/%E9%9D%99%E5%AE%89%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/id1340723421?mt=8"
+    },
+    "survey": {
+      "id": "com.gxhc.gxyw.survey",
+      "name": "广信勘察",
+      "version": "1.0.0",
+      "productId": "gxkc",
+      "serverUrl": "http://114.55.236.5:50",
+      "resServerUrl": "http://114.55.236.5:51",
+      "jpush_app_key": "27d467244451f9797e99780f",
+      "baidu_ak": "uXvm6cjMmm7cGWiMFYoBGGebYPd0Nfzn",
+      "updateUrl_Android": "/its_android.apk",
+      "updateUrl_IOS": "https://itunes.apple.com/cn/app/%E9%9D%99%E5%AE%89%E6%99%BA%E8%83%BD%E8%BF%90%E7%BB%B4/id1340723421?mt=8"
+    }
+  }
+
+}
