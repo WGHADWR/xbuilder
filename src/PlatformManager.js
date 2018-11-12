@@ -2,7 +2,7 @@ const fs = require('fs')
 const sys_path = require('path')
 const inquirer = require('inquirer')
 
-const GlobalSettings = require('./Global')
+const AppConfiguration = require('./AppConfiguration')
 const Log = require('./util/log')
 const FileUtils = require('./util/utils').FileUtils
 const StringUtils = require('./util/utils').StringUtils
@@ -21,34 +21,44 @@ class PlatformManager {
     const buildModel = result.model === 'Release' ? '--release --prod' : '--debug';
 
     this.initCordovaProject();
-    const platform = GlobalSettings.__darwin__ ? 'ios' : 'android';
+    const platform = AppConfiguration.__Darwin__ ? 'ios' : 'android';
     const path = sys_path.resolve(process.cwd(), `./platforms/${platform}`);
     if (!fs.existsSync(path)) {
       throw new Error('Platform is not added.');
     }
-    console.log(process.cwd())
-    const command = GlobalSettings.__win32__ ? 'ionic.cmd' : 'ionic';
+    // console.log(process.cwd())
+    const command = AppConfiguration.__Darwin__ ? 'ionic' : 'ionic.cmd';
     return await ProcessExecutor.spawn(command, ['cordova', 'build', platform, buildModel]);
   }
 
   async add() {
     this.initCordovaProject();
 
-    const platform = GlobalSettings.__darwin__ ? 'ios' : GlobalSettings.platform;
-    const command = GlobalSettings.__win32__ ? 'cordova.cmd' : 'cordova';
+    let platform = AppConfiguration.__Darwin__ ? 'ios' : 'cordova-android';
+    const command = AppConfiguration.__Win32__ ? 'cordova.cmd' : 'cordova';
+
+    const platformVersion = 'latest';
+    if (!AppConfiguration.__Darwin__) {
+      platformVersion = AppConfiguration.getInstance()
+          .getPlatformVersion(appConfig.PlatformAndroid);
+    }
+    platform = platform + '@' + platformVersion;
     
     Log.debug(`Installing platform ${platform} ...\n`);
     let result = await ProcessExecutor.spawn(command, ['platform', 'add', platform]);
     if (result.code !== 0) {
       throw new Error(`Install platform ${platform} failed.`);
     }
-    this.setAndroidSupport();
+
+    if (!AppConfiguration.__Darwin__) {
+      this.setAndroidSupport();
+    }
     Log.info(`Platform ${platform} is added.`);
   }
 
   async remove() {
-    const platform = GlobalSettings.__darwin__ ? 'ios' : 'android';
-    const command = GlobalSettings.__win32__ ? 'cordova.cmd' : 'cordova';
+    const platform = AppConfiguration.__Darwin__ ? 'ios' : 'android';
+    const command = AppConfiguration.__Win32__ ? 'cordova.cmd' : 'cordova';
 
     Log.debug(`Removing installed platform ...\n`);
     return await ProcessExecutor.spawn(command, ['platform', 'remove', platform]);
@@ -77,7 +87,7 @@ class PlatformManager {
   }
   */
   setAndroidSupport() {
-    if (GlobalSettings.__darwin__) {
+    if (AppConfiguration.__Darwin__) {
       return;
     }
     try {
@@ -85,7 +95,7 @@ class PlatformManager {
       if (!fs.existsSync(platformPath)) {
         throw new Error(`The platform is not added!`);
       }
-      const { android_support_v4_version = '' } = GlobalSettings;
+      const android_support_v4_version = AppConfiguration.getInstance().getAndroidSupportV4();
       if (!android_support_v4_version) {
         throw new Error(`Unspecified parameter ${android_support_v4_version}`);
       }

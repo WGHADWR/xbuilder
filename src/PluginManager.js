@@ -1,6 +1,6 @@
 const fs = require('fs');
 const sys_path = require('path');
-const GlobalSettings = require('./Global');
+const AppConfiguration = require('./AppConfiguration');
 const ProcessExecutor = require('./util/process');
 
 const Log = require('./util/log')
@@ -58,7 +58,12 @@ class PluginManager {
       return true;
     }
 
-    const { version, variables = {} } = options;
+    const { variables = {} } = options;
+    let version = AppConfiguration.getInstance.getPluginVersion(name, process.platform);
+    if (!version) {
+      version = options.version;
+    }
+
     const args = ['plugin', 'add', name + '@' + version];
     if (this.pluginWithNoVariables.indexOf(name) === -1) {
       if (Object.keys(variables).length > 0) {
@@ -69,7 +74,7 @@ class PluginManager {
       }
     }
     Log.info(`Installing plugin ${name}@${version} ...`);
-    const command = GlobalSettings.__win32__ ? 'cordova.cmd' : 'cordova'
+    const command = AppConfiguration.__Win32__ ? 'cordova.cmd' : 'cordova'
     const result = await ProcessExecutor.spawn(command, args);
     return result.code === 0;
   }
