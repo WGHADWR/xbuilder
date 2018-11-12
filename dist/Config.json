@@ -1,0 +1,16 @@
+{
+  "android": {
+    "plugins": {
+      "cordova-plugin-jcore": "1.1.12",
+      "jpush-phonegap-plugin": "3.3.2"
+    },
+    "platform": "6.3.0",
+    "android_support_v4_version": "27.1.0"
+  },
+  "ios": {
+    "plugins": {
+      "cordova-plugin-jcore": "latest",
+      "jpush-phonegap-plugin": "latest"
+    }
+  }
+}

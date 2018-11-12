@@ -3,7 +3,7 @@ const sys_path = require('path')
 const DOMParser = require('xmldom').DOMParser
 const XMLSerializer = require('xmldom').XMLSerializer
 
-const GlobalSettings = require('./Global')
+const AppConfiguration = require('./AppConfiguration')
 const Log = require('./util/log')
 const FileUtils = require('./util/utils').FileUtils
 
@@ -79,7 +79,7 @@ class OEMConfigManager {
   }
   
   copySplashAndIcons(oemId) {
-    if (!GlobalSettings.__win32__ || !oemId) {
+    if (!AppConfiguration.__Win32__ || !oemId) {
       return;
     }
     const oemResPath = sys_path.resolve(process.cwd(), `./oem/${oemId}`);
