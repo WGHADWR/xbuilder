@@ -58,7 +58,12 @@ class PluginManager {
       return true;
     }
 
-    const { version, variables = {} } = options;
+    const { variables = {} } = options;
+    let version = AppConfiguration.getInstance.getPluginVersion(name, process.platform);
+    if (!version) {
+      version = options.version;
+    }
+
     const args = ['plugin', 'add', name + '@' + version];
     if (this.pluginWithNoVariables.indexOf(name) === -1) {
       if (Object.keys(variables).length > 0) {
