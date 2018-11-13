@@ -25,7 +25,8 @@ class PluginManager {
     const content = fs.readFileSync(this.packageConfigFile);
     const configs = JSON.parse(content);
     if (!configs['cordova'] || !configs['cordova']['plugins']) {
-      throw new Error('Can not found plugins config.');
+      // throw new Error('Can not found plugins config.');
+      return null;
     }
     const dependencies = configs['dependencies'] || {};
     const _plugins = configs['cordova']['plugins'] || {};
@@ -42,6 +43,10 @@ class PluginManager {
   async install() {
     Log.info('Installing plugins ...');
     const plugins = this.getPlugins();
+    if (!plugins) {
+      Log.warn('No plugin config.');
+      return;
+    }
     for (let name in plugins) {
       const result = await this.installPlugin(name, plugins[name]);
       if (!result) {
