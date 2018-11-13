@@ -29,6 +29,14 @@ class AppConfiguration {
     return process.platform === 'linux';
   }
 
+  static get __Android__() {
+    return !AppConfiguration.__Darwin__;
+  }
+
+  static get __IOS__() {
+    return AppConfiguration.__Darwin__;
+  }
+
   static getInstance() {
     if (!AppConfiguration.instance) {
       AppConfiguration.instance = new AppConfiguration();
@@ -58,19 +66,21 @@ class AppConfiguration {
     this.config = JSON.parse(content);
   }
 
-  getPluginVersion(name, platform) {
+  getPluginVersion(name) {
+    const platform = AppConfiguration.__IOS__ ? 'ios' : 'android';
     const { plugins = {} } = this.config[platform];
     return plugins[name];
   }
 
-  getPlatformVersion(platform) {
+  getPlatformVersion() {
+    const platform = AppConfiguration.__IOS__ ? 'ios' : 'android';
     const { platform: platformV } = this.config[platform];
     return platformV;
   }
 
   getAndroidSupportV4() {
     const { android_support_v4_version: version = '27.1.0' } = this.config[this.PlatformAndroid];
-    return { 'android_support_v4_version': version }
+    return version;
   }
 
 }

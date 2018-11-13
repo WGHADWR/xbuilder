@@ -39,7 +39,7 @@ class PlatformManager {
 
     let platformVersion = 'latest';
     if (!AppConfiguration.__Darwin__) {
-      platformVersion = AppConfiguration.getInstance().getPlatformVersion(process.platform);
+      platformVersion = AppConfiguration.getInstance().getPlatformVersion();
     }
     platform = platform + '@' + platformVersion;
     

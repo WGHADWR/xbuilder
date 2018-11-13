@@ -59,7 +59,7 @@ class PluginManager {
     }
 
     const { variables = {} } = options;
-    let version = AppConfiguration.getInstance.getPluginVersion(name, process.platform);
+    let version = AppConfiguration.getInstance().getPluginVersion(name);
     if (!version) {
       version = options.version;
     }
