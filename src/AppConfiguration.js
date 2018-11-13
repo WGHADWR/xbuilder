@@ -50,7 +50,7 @@ class AppConfiguration {
   }
 
   load() {
-    const path = sys_path.resolve(process.cwd(), this.ConfigFile);
+    const path = sys_path.resolve(process.cwd(), `./node_modules/xbuilder/dist/${this.ConfigFile}`);
     if (!fs.existsSync(path)) {
       throw new Error(`The config file ${this.ConfigFile} does not exists.`);
     }
