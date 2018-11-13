@@ -37,7 +37,7 @@ class PlatformManager {
     let platform = AppConfiguration.__Darwin__ ? 'ios' : 'cordova-android';
     const command = AppConfiguration.__Win32__ ? 'cordova.cmd' : 'cordova';
 
-    const platformVersion = 'latest';
+    let platformVersion = 'latest';
     if (!AppConfiguration.__Darwin__) {
       platformVersion = AppConfiguration.getInstance()
           .getPlatformVersion(appConfig.PlatformAndroid);
