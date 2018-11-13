@@ -47,10 +47,12 @@ class AppBuilder {
     }
     await this.pluginMgr.install();
 
-    const { oem = {} } = this.oemConfigMgr.OEMConfigs;
-    const oemConfig = oem[oemId];
-    const fetchJSONManager = new FetchJSONManager(oemConfig);
-    fetchJSONManager.config();
+    if (this.oemConfigMgr.OEMConfigs) {
+      const { oem = {} } = this.oemConfigMgr.OEMConfigs;
+      const oemConfig = oem[oemId];
+      const fetchJSONManager = new FetchJSONManager(oemConfig);
+      fetchJSONManager.config();
+    }
 
     if (this.installConfigs.installPlatform) {
       await this.addPlatform();
