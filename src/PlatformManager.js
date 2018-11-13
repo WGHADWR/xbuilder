@@ -35,7 +35,7 @@ class PlatformManager {
     this.initCordovaProject();
 
     let platform = AppConfiguration.__Darwin__ ? 'ios' : 'cordova-android';
-    const command = AppConfiguration.__Win32__ ? 'cordova.cmd' : 'cordova';
+    const command = AppConfiguration.__Win32__ ? 'ionic.cmd' : 'ionic';
 
     let platformVersion = 'latest';
     if (!AppConfiguration.__Darwin__) {
@@ -44,7 +44,7 @@ class PlatformManager {
     platform = platform + '@' + platformVersion;
     
     Log.debug(`Installing platform ${platform} ...\n`);
-    let result = await ProcessExecutor.spawn(command, ['platform', 'add', platform]);
+    let result = await ProcessExecutor.spawn(command, ['cordova', 'platform', 'add', platform]);
     if (result.code !== 0) {
       throw new Error(`Install platform ${platform} failed.`);
     }
