@@ -74,8 +74,7 @@ class AppBuilder {
     const oems = this.oemConfigMgr.getOEMList();
     if (oems.length === 0) {
       Log.warn('No oem options!\n');
-      resolve({});
-      return;
+      return {};
     }
     return await inquirer.prompt([{
       type: 'list',
