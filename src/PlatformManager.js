@@ -94,7 +94,7 @@ class PlatformManager {
       if (!fs.existsSync(platformPath)) {
         throw new Error(`The platform is not added!`);
       }
-      const android_support_v4_version = AppConfiguration.getInstance().getAndroidSupportV4();
+      const android_support_v4_version = AppConfiguration.getInstance().getAndroidSupportV4Version();
       if (!android_support_v4_version) {
         throw new Error(`Unspecified parameter ${android_support_v4_version}`);
       }

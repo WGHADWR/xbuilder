@@ -78,7 +78,7 @@ class AppConfiguration {
     return platformV;
   }
 
-  getAndroidSupportV4() {
+  getAndroidSupportV4Version() {
     const { android_support_v4_version: version = '27.1.0' } = this.config[this.PlatformAndroid];
     return version;
   }
