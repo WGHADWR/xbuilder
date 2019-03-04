@@ -18,7 +18,7 @@ class PlatformManager {
       choices: ['Debug', 'Release']
     }]);
 
-    const buildModel = result.model === 'Release' ? '--release --prod' : '--debug';
+    const buildModel = result.model === 'Release' ? '--prod' : '--debug';
 
     this.initCordovaProject();
     const platform = AppConfiguration.__Darwin__ ? 'ios' : 'android';
