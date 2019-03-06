@@ -18,17 +18,16 @@ class PlatformManager {
       choices: ['Debug', 'Release']
     }]);
 
-    const buildModel = result.model === 'Release' ? '--prod' : '--debug';
-
     this.initCordovaProject();
+
     const platform = AppConfiguration.__Darwin__ ? 'ios' : 'android';
     const path = sys_path.resolve(process.cwd(), `./platforms/${platform}`);
     if (!fs.existsSync(path)) {
       throw new Error('Platform is not added.');
     }
-    // console.log(process.cwd())
     const command = AppConfiguration.__Darwin__ ? 'ionic' : 'ionic.cmd';
-    return await ProcessExecutor.spawn(command, ['cordova', 'build', platform, buildModel]);
+    const buildModel = result.model === 'Release' ? ['--prod', '--release'] : ['--debug'];
+    return await ProcessExecutor.spawn(command, ['cordova', 'build', platform, ...buildModel]);
   }
 
   async add() {
