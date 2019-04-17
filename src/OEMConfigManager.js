@@ -79,7 +79,7 @@ class OEMConfigManager {
   }
   
   copySplashAndIcons(oemId) {
-    if (!AppConfiguration.__Win32__ || !oemId) {
+    if (!oemId) {
       return;
     }
     const oemResPath = sys_path.resolve(process.cwd(), `./oem/${oemId}`);
